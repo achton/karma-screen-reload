@@ -1,20 +1,42 @@
 'use client';
 
-export default function DevScreenWrapper({ children }: { children: React.ReactNode }) {
+import { useEffect, useState } from 'react';
+
+type Props = {
+  children: React.ReactNode;
+};
+
+const TARGET_WIDTH = 2160;
+const TARGET_HEIGHT = 3840;
+
+export default function DevScreenWrapper({ children }: Props) {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const updateScale = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const scaleX = vw / TARGET_WIDTH;
+      const scaleY = vh / TARGET_HEIGHT;
+      setScale(Math.min(scaleX, scaleY));
+    };
+
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 overflow-hidden">
-      <div
-        className="relative border-4 border-white shadow-2xl rounded-xl overflow-hidden"
-        style={{
-          width: '1080px',
-          height: '1920px',
-          transform: 'scale(0.7)',
-          transformOrigin: 'center',
-          backgroundColor: '#000',
-        }}
-      >
-        {children}
-      </div>
+    <div
+      style={{
+        width: `${TARGET_WIDTH}px`,
+        height: `${TARGET_HEIGHT}px`,
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        backgroundColor: 'black',
+      }}
+    >
+      {children}
     </div>
   );
 }

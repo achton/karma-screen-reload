@@ -48,7 +48,7 @@ export default function Page() {
   const slideshow = <KarmaSlideshow data={data} />;
 
   return (
-    <>
+    <div className="relative w-full mx-auto overflow-hidden h-screen">
       {useDevWrapper ? (
         <>
           <DevScreenWrapper>{slideshow}</DevScreenWrapper>
@@ -57,6 +57,6 @@ export default function Page() {
       ) : (
         slideshow
       )}
-    </>
+    </div>
   );
 }
