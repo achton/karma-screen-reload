@@ -9,16 +9,17 @@ import { KarmaNominee } from '@/types';
 
 import { useEffect, useState } from 'react';
 
-//eslint-disable-next-line
+// eslint-disable-next-line
 const isDev = process.env.NODE_ENV === 'development';
 
 const useTestData = true;
 
-const useDevWrapper = true;
+const useDevWrapper = false;
 
 export default function Page() {
-  const [data, setData] = useState<KarmaNominee[]>([]);
+  const [data, setData] = useState<KarmaNominee[]>(config.testKings);
 
+  console.log('data at start?', data);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,12 +27,12 @@ export default function Page() {
         if (useTestData && Array.isArray(config.testKings)) {
           setData(config.testKings);
         } else {
-          const res = await fetch(config.LatestKarmaNominations); // Your Firebase URL
+          const res = await fetch(config.LatestKarmaNominations);
           if (!res.ok) throw new Error(`Status ${res.status}`);
           const json = await res.json();
           setData(json as KarmaNominee[]);
         }
-        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         console.error('Error fetching data:', err.message);
       }
@@ -43,6 +44,7 @@ export default function Page() {
 
   if (!data.length) return <div className="text-center text-gray-500">Loading...</div>;
 
+  console.log('data?', data);
   const slideshow = <KarmaSlideshow data={data} />;
 
   return (
