@@ -9,7 +9,12 @@ import { KarmaNominee } from '@/types';
 
 import { useEffect, useState } from 'react';
 
+//eslint-disable-next-line
 const isDev = process.env.NODE_ENV === 'development';
+
+const useTestData = true;
+
+const useDevWrapper = true;
 
 export default function Page() {
   const [data, setData] = useState<KarmaNominee[]>([]);
@@ -18,7 +23,7 @@ export default function Page() {
     const fetchData = async () => {
       try {
         // Use test data in dev, otherwise fetch from Firebase
-        if (isDev && Array.isArray(config.testKings)) {
+        if (useTestData && Array.isArray(config.testKings)) {
           setData(config.testKings);
         } else {
           const res = await fetch(config.LatestKarmaNominations); // Your Firebase URL
@@ -32,16 +37,17 @@ export default function Page() {
       }
     };
 
+    console.log('Fetching Karma nominations data...');
     fetchData();
   }, []);
 
-  if (!data.length) return null;
+  if (!data.length) return <div className="text-center text-gray-500">Loading...</div>;
 
   const slideshow = <KarmaSlideshow data={data} />;
 
   return (
     <>
-      {isDev ? (
+      {useDevWrapper ? (
         <>
           <DevScreenWrapper>{slideshow}</DevScreenWrapper>
           <DevDataPanel data={data} />

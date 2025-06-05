@@ -9,7 +9,9 @@
     "lint": "npm run typecheck && npm run prettier:check && next lint",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "clean": "rm -rf .next out",
+    "preview:gh": "npm run clean && NEXT_PUBLIC_BASE_PATH=/karma-screen-reload next build && npx serve out"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
