@@ -3,14 +3,14 @@ import './globals.css';
 
 import { Space_Grotesk, Space_Mono } from 'next/font/google';
 
-export const spaceMono = Space_Mono({
+const spaceMono = Space_Mono({
   weight: ['400', '700'],
   subsets: ['latin'],
   variable: '--font-space-mono',
   display: 'swap',
 });
 
-export const spaceGrotesk = Space_Grotesk({
+const spaceGrotesk = Space_Grotesk({
   weight: ['400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-space-grotesk',
