@@ -92,7 +92,7 @@ export default function LargeCard({ nominee, duration = DEFAULT_ANIMATION_DURATI
           className="space-y-10"
         >
           <motion.div variants={animationConfig.item}>
-            <Typo as="h1" variant="xlarge" weight={700} className="mb-10">
+            <Typo as="h1" variant="xlarge" weight={700} font={'grotesk'} className="mb-10">
               {nominee.full_name}
             </Typo>
           </motion.div>

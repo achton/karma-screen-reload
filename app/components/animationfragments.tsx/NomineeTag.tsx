@@ -15,7 +15,7 @@ export const NomineeTag = ({ title, delay, duration }: Props) => (
     animate={{ scaleX: 1 }}
     exit={{ scaleX: 0 }}
     transition={{ duration }}
-    className="absolute top-12 left-12 z-10 overflow-hidden origin-left inline-block px-8 py-4 bg-reload-primary rounded-2xl"
+    className="absolute top-12 left-12 z-10 overflow-hidden origin-left inline-block px-8 py-4 bg-reload-primary rounded-xl"
     layout
   >
     <motion.div
@@ -25,9 +25,7 @@ export const NomineeTag = ({ title, delay, duration }: Props) => (
       transition={{ delay, duration: 0.3 }}
       layout
     >
-      <Typo variant="medium" className="text-black uppercase text-center whitespace-nowrap">
-        {title}
-      </Typo>
+      <Typo className="text-black uppercase text-center whitespace-nowrap">{title}</Typo>
     </motion.div>
   </motion.div>
 );

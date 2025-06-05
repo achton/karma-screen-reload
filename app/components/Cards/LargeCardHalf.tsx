@@ -51,10 +51,23 @@ const fadeInWithBlur = (duration: number) => ({
 
 const VoteItem = ({ text }: { text: string }) => (
   <motion.div variants={animationConfig.item} className="relative pl-12">
-    <span className="absolute left-0 top-[0.3em] scale-200">→</span>
-    <Typo variant="medium" weight={400}>
-      {text}
-    </Typo>
+    <svg
+      className="absolute left-0 top-[0.2em] w-5 h-5 text-black "
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M13 5l7 7-7 7M5 12h14"
+        stroke="currentColor"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+
+    <Typo weight={400}>{text}</Typo>
   </motion.div>
 );
 
@@ -66,7 +79,7 @@ type Props = {
 export default function LargeCardHalf({ nominee, duration = DEFAULT_ANIMATION_DURATION }: Props) {
   return (
     <motion.div
-      className="w-full h-full relative bg-black text-white overflow-hidden grid grid-rows-[1fr_minmax(50%,min-content)]"
+      className="w-full h-full relative bg-black text-white overflow-hidden grid grid-rows-[minmax(200px,1fr)_minmax(50%,auto)]"
       transition={{ duration }}
     >
       <NomineeTag title={nominee.title} delay={duration} duration={duration} />
@@ -81,7 +94,7 @@ export default function LargeCardHalf({ nominee, duration = DEFAULT_ANIMATION_DU
 
       {/* Text content */}
       <motion.div
-        className="bg-reload-secondary h-full px-16 py-20 text-black"
+        className="bg-reload-secondary flex flex-col px-12 py-8 text-black overflow-auto space-y-10 "
         {...fadeInWithBlur(duration)}
       >
         <motion.div
@@ -89,19 +102,33 @@ export default function LargeCardHalf({ nominee, duration = DEFAULT_ANIMATION_DU
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="space-y-10"
         >
           <motion.div variants={animationConfig.item}>
-            <Typo as="h1" font={'grotesk'} variant="xlarge" weight={500} className="mb-10">
+            <Typo as="h1" font={'grotesk'} variant="xlarge" weight={500} className="mb-6">
               {nominee.full_name}
             </Typo>
           </motion.div>
 
-          <motion.div variants={animationConfig.container} className="space-y-10">
+          <motion.div variants={animationConfig.container} className="space-y-4">
             {nominee.votes.map((vote, i) => (
               <VoteItem key={i} text={vote} />
             ))}
           </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="mt-auto flex justify-between items-center"
+          variants={animationConfig.container}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <Typo variant={'small'} weight={700} className="uppercase">
+            Uge {nominee.week}
+          </Typo>
+          <Typo variant={'small'} weight={700} className="uppercase">
+            kollegaer siger
+          </Typo>
         </motion.div>
       </motion.div>
     </motion.div>

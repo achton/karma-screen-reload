@@ -1,12 +1,12 @@
 'use client';
 
-import LargeCard from '@/app/components/Cards/LargeCard';
+import LargeCardHalf from '@/app/components/Cards/LargeCardHalf';
 import { KarmaNominee } from '@/types';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 // Must include the duration of animation durations & delays.
-const SLIDE_DURATION = 2000000;
+const SLIDE_DURATION = 10000;
 
 type Props = {
   data: KarmaNominee[];
@@ -29,7 +29,7 @@ export default function KarmaSlideshow({ data }: Props) {
   return (
     <>
       <AnimatePresence mode="wait">
-        <LargeCard key={visibleKey} nominee={current} />
+        <LargeCardHalf key={visibleKey} nominee={current} />
       </AnimatePresence>
     </>
   );

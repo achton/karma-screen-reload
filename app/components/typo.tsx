@@ -7,10 +7,11 @@ import React, { forwardRef } from 'react';
 
 export const variants = {
   variant: {
-    xlarge: 'text-6xl',
-    large: 'text-4xl',
-    medium: 'text-3xl',
-    base: 'text-xl',
+    xlarge: 'text-4xl',
+    large: 'text-2xl',
+    medium: 'text-1xl',
+    base: 'text-base',
+    small: 'text-sm',
   },
   weight: {
     400: 'font-normal',
