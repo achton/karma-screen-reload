@@ -6,7 +6,7 @@ import { springSettings } from '@/lib/config';
 import { KarmaNominee } from '@/types';
 import { motion } from 'framer-motion';
 
-const DEFAULT_ANIMATION_DURATION = 0.6;
+const DEFAULT_ANIMATION_DURATION = 0.3;
 const ANIMATION_DELAY = 1.2;
 
 const animationConfig = {
@@ -31,11 +31,10 @@ const animationConfig = {
 };
 
 const fadeInWithBlur = (duration: number) => ({
-  initial: { opacity: 0, filter: 'blur(5px)' },
+  initial: { opacity: 0 },
   animate: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0)',
     transition: {
       duration: duration / 2,
       delay: ANIMATION_DELAY,
@@ -44,7 +43,7 @@ const fadeInWithBlur = (duration: number) => ({
   },
   exit: {
     opacity: 0,
-    filter: 'blur(5px)',
+
     transition: { duration, delay: ANIMATION_DELAY },
   },
 });
