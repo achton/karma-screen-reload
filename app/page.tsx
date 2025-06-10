@@ -43,7 +43,7 @@ export default function Page() {
     fetchData();
   }, []);
 
-  if (data.length)
+  if (!data.length)
     return (
       <div className="h-screen flex items-center justify-center bg-reload-secondary">
         <Typo className="text-center" variant={'large'} font={'grotesk'}>
@@ -56,7 +56,7 @@ export default function Page() {
   const slideshow = <KarmaSlideshow data={data} />;
 
   return (
-    <div className="relative w-full mx-auto overflow-hidden h-screen -translate-y-[-2px] -tranlate-x-[-2px]">
+    <div className="relative w-full mx-auto overflow-hidden h-screen">
       {useDevWrapper ? (
         <>
           <DevScreenWrapper>{slideshow}</DevScreenWrapper>
