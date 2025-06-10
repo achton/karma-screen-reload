@@ -127,7 +127,7 @@ export default function LargeCardHalf({ nominee, duration = DEFAULT_ANIMATION_DU
             Uge {nominee.week}
           </Typo>
           <Typo variant={'small'} weight={700} className="uppercase">
-            kollegaer siger
+            kollegerne siger
           </Typo>
         </motion.div>
       </motion.div>

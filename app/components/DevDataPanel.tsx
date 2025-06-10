@@ -30,7 +30,7 @@ export default function DevDebugPanel({ data }: DevDebugPanelProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1 }}
           style={{ display: open ? 'block' : 'none' }}
-          className="w-[720px] max-h-[80vh] bg-white border border-gray-300 shadow-xl rounded-lg overflow-auto p-4"
+          className="w-[720px] max-h-[80vh] bg-white  shadow-xl rounded-lg overflow-auto p-4"
         >
           <h2 className="font-bold mb-2 text-gray-800">Fetched JSON</h2>
 

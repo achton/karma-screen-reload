@@ -3,6 +3,7 @@
 import DevDataPanel from '@/app/components/DevDataPanel';
 import DevScreenWrapper from '@/app/components/DevScreenWrapper';
 import KarmaSlideshow from '@/app/components/SlideShow';
+import { Typo } from '@/app/components/typo';
 
 import { config } from '@/config';
 import { KarmaNominee } from '@/types';
@@ -12,7 +13,7 @@ import { useEffect, useState } from 'react';
 // eslint-disable-next-line
 const isDev = process.env.NODE_ENV === 'development';
 
-const useTestData = true;
+const useTestData = false;
 
 const useDevWrapper = false;
 
@@ -42,13 +43,20 @@ export default function Page() {
     fetchData();
   }, []);
 
-  if (!data.length) return <div className="text-center text-gray-500">Loading...</div>;
+  if (data.length)
+    return (
+      <div className="h-screen flex items-center justify-center bg-reload-secondary">
+        <Typo className="text-center" variant={'large'} font={'grotesk'}>
+          Der er ingen nominerede i øjeblikket!
+        </Typo>
+      </div>
+    );
 
   console.log('data?', data);
   const slideshow = <KarmaSlideshow data={data} />;
 
   return (
-    <div className="relative w-full mx-auto overflow-hidden h-screen">
+    <div className="relative w-full mx-auto overflow-hidden h-screen -translate-y-[-2px] -tranlate-x-[-2px]">
       {useDevWrapper ? (
         <>
           <DevScreenWrapper>{slideshow}</DevScreenWrapper>
