@@ -1,21 +1,33 @@
 'use client';
 
 import { Typo } from '@/app/components/typo';
+import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+
+type Variant = 'largeCardHalf' | 'whiteSpaceCard';
 
 type Props = {
   title: string;
   delay: number;
   duration: number;
+  variant: Variant;
+  className?: string;
 };
 
-export const NomineeTag = ({ title, delay, duration }: Props) => (
+const variantClasses: Record<Variant, string> = {
+  largeCardHalf:
+    'absolute top-12 left-12 z-10 overflow-hidden origin-left inline-block px-8 py-4 bg-reload-primary rounded-xl',
+  whiteSpaceCard:
+    'bg-reload-primary inline-block px-4 py-2 text-black border border-gray-200 rounded-lg shadow-sm w-min',
+};
+
+export const NomineeTag = ({ title, delay, duration, variant, className }: Props) => (
   <motion.div
     initial={{ scaleX: 0 }}
     animate={{ scaleX: 1 }}
     exit={{ scaleX: 0 }}
     transition={{ duration }}
-    className="absolute top-12 left-12 z-10 overflow-hidden origin-left inline-block px-8 py-4 bg-reload-primary rounded-xl"
+    className={cn(variantClasses[variant], className)}
     layout
   >
     <motion.div

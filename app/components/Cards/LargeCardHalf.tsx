@@ -81,7 +81,12 @@ export default function LargeCardHalf({ nominee, duration = DEFAULT_ANIMATION_DU
       className="w-full h-full relative bg-black text-white overflow-hidden grid grid-rows-[minmax(200px,1fr)_minmax(50%,auto)]"
       transition={{ duration }}
     >
-      <NomineeTag title={nominee.title} delay={duration} duration={duration} />
+      <NomineeTag
+        title={nominee.title}
+        delay={duration}
+        duration={duration}
+        variant="largeCardHalf"
+      />
 
       {/* Image */}
       <motion.img

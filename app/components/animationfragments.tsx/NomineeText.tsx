@@ -1,48 +1,35 @@
 'use client';
 
-import { Typo } from '@/app/components/typo';
+import { NomineeVote } from '@/app/components/animationfragments.tsx/NomineeVote';
+import { animationConfig, fadeInWithBlur } from '@/app/components/Cards/WhiteSpaceCard';
+import { cn } from '@/lib/utils';
+import { KarmaNominee } from '@/types';
 import { motion } from 'framer-motion';
 
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, delay: 0.8 },
-  },
-  exit: {
-    opacity: 0,
-    y: 20,
-    transition: { duration: 0.4 },
-  },
-};
+interface NomineeTextProps {
+  nominee: KarmaNominee;
+  duration?: number;
+  className?: string;
+}
 
-export default function NomineeText({ fullName, votes }: { fullName: string; votes: string[] }) {
+export default function NomineeText({ nominee, duration = 0.3, className }: NomineeTextProps) {
   return (
     <motion.div
-      variants={textVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="bg-reload-secondary h-full px-16 py-20 text-black relative z-10"
+      className={cn('text-black space-y-10 mt-auto overflow-visible', className)}
+      {...fadeInWithBlur(duration)}
     >
-      <Typo as="h1" variant="xlarge" weight={700} className="mb-10">
-        {fullName}
-      </Typo>
-      <div className="space-y-4">
-        {votes.map((vote, i) => (
-          <div key={i} className="space-y-4">
-            <Typo variant="medium" weight={400}>
-              {vote}
-            </Typo>
-            {i < votes.length - 1 && (
-              <Typo variant="medium" weight={400}>
-                –
-              </Typo>
-            )}
-          </div>
-        ))}
-      </div>
+      <motion.div
+        variants={animationConfig.container}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        <motion.div variants={animationConfig.container} className="space-y-4">
+          {nominee.votes.map((vote, i) => (
+            <NomineeVote key={i} text={vote} />
+          ))}
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 }

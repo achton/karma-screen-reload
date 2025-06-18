@@ -71,4 +71,8 @@ html {
   .font-grotesk {
     font-family: var(--font-space-grotesk), sans-serif;
   }
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
 }
