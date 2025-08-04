@@ -31,7 +31,10 @@ export default function Page() {
           const res = await fetch(config.LatestKarmaNominations);
           if (!res.ok) throw new Error(`Status ${res.status}`);
           const json = await res.json();
-          setData(json as KarmaNominee[]);
+          delete json.week;
+          delete json.year;
+          const nominees = Object.values(json);
+          setData(nominees as KarmaNominee[]);
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
